@@ -37,20 +37,20 @@ class NoteController extends Controller
     }
 
     public function edit($id)
-{
-    $note = \App\Models\Note::findOrFail($id);
-    return view('notes.edit', compact('note'));
-}
+    {
+        $note = \App\Models\Note::findOrFail($id);
+        return view('notes.edit', compact('note'));
+    }
 
-public function update(Request $request, Note $note)
-{
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-    ]);
+    public function update(Request $request, Note $note)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
 
-    $note->update($validated);
+        $note->update($validated);
 
-    return redirect()->route('notes.index')->with('success', 'Заметка обновлена!');
-}
+        return redirect()->route('notes.index')->with('success', 'Заметка обновлена!');
+    }
 }
